@@ -1,11 +1,72 @@
-Group Members: Jnana Krishnamsetty, Cameron Ownbey, Brandon Parker, Bryson White
+Bryson White, Brandon Parker, Jnana Krishnamsetty, Cameron Ownbey
 
 List the source of and describe at least 4 potential data sets:
 
-Identify who your customer/s would be:
+Cameron: https://projects.fivethirtyeight.com/super-bowl-ads/
+This data set is surrounding the usage of superbowl ads by companies. The data set indicates what types of effects that the ad had on viewers. For example, if it was trying to be funny, or had animals in it. This list is included from 2000 to 2020, including 10 brands who produced commercials.
+Bryson: https://covid19.who.int 
+This is a data set based on the Confirmed cases and deaths of Covid19 in each country.
+Jnana: https://data.unicef.org/ 
+This data set is a compilation of critical issues in developed and developing countries. For example, UNCIEF provides relevant data on education, mortality rates, and diseases in countries.
+Brandon: https://datacatalog.worldbank.org/dataset/health-nutrition-and-population-statistics
+Data set focuses on health, nutrition and population statistics gathered from a variety of international and national sources.
+
+Identify who your customer/s would  be:
+
+Cameron: The customers of this data set would be those who are wanting to produce effective ads to Americans. So basically, any company that sells products or services within the USA. These indications will help companies reach their audience the best way possible, by appealing to their tastes and like. It also helps companies stay away from creating bad commercials.
+
+Bryson: The customers would be anyone who is concerned about their health regarding covid19. This can be someone who is wanting to relocate or move somewhere else, and is thinking about their safest option. It can also be beneficial or tourists deciding on safe places to visit.
+
+Jnana: Customers of this data set would be health care organizations, activist groups, or financial organizations who are wanting to help nations with their issues. Health care organizations can use these data sets to understand current health conditions and determine how they can help. Activist groups can use this data to bring attention to critical issues. Finally, even financial organizations can use these data sets to determine poverty rates in countries to help those financially. 
+
+Brandon: Customers would be those concerned about the welfare of the people in the area they live in or perhaps the area where they would potentially be moving to. Healthcare providers/ charities could also identify problem spots.
+
 
 Describe the problem that each proposed project solves and justify its need:
 
+Cameron: The problem that this data set solves is that some commercials are terrible. They are ineffective, don't appeal to Americans, and don’t utilize an effective purpose. This creates a bigger issue for companies, as they are spending millions of dollars on advertising, just for their commercials to not be beneficial. This data set will help to solve the problem by giving companies insight into what Americans like. That way, products can be sold effectively and will continue to be used as a market. 
+
+Bryson: The problem that the covid19 data set will provide is to find the confirmed cases/death ratios in each country. While the data set offers the amount of cases and deaths, this project will calculate the cases/deaths ratio for each country, and the user will be able to compare the ratios between different locations around the world. 
+
+Jnana: The Unicef data helps solve critical issues that are prominent around nations today. The data sets allow insight to very useful information, which health care, financial, and government organizations can use to tackle these issues. It provides a beautiful representation of statistics of historical data which will lend users a solution to the crisis in the world today. 
+
+Brandon: Dataset has the potential to compare and contrast healthcare of one country to another in order to insure they are getting the best care where they are located. Also, to allow those who wish to, to strive to improve the healthcare in their area by making suggestions to government bodies. 
+
 State the product vision and how your web based project would be useful to society:
 
+Cameron: The product vision is to create an application that will be beneficial to companies by stating what types of things that Americans like and are excited about in commercials. This web application will include a chart of these indicators, showing companies the effectiveness of each indicator and differences among commercials. This product will be useful to society as it will allow commercials to be better suited for their specific audiences. As more products are purchased, the economy boosts and will overall help the country. As the economy is boosted, more job opportunities are created, and then innovation continues to flourish. Everything benefits from a better economy.
+
+Bryson: The product vision is to create an application that will help the user determine where the safest places are regarding the covid19 virus. The product will take data from around the world, and calculate the cases to deaths ratios for a certain country. The user will be able to compare this ratio with other countries to find out if a certain location is the safest for their needs. This can help the user determine which countries are handling the pandemic better than others, while farthing their knowledge of the virus as well. While the dataset from WHO (World Health Organization) offers the confirmed cases and deaths, our application will compare the cases to deaths ratios and show them on a simple graph. This allows the user for an easy, simple experience in finding which places to live or visit, and will hopefully even save lives.
+
+Jnana: The product vision is to create an application that will help users gather information on prospecting countries statistics. The web application will take the data in the data sets, which is a compilation of data around the world, and represent key statistics and information if issues followed by the country. The user will be able to seamlessly surf the data with its variety of charts/graphs and derive information necessary for their organization. This application will help the society by creating a space where anyone can learn, read, and extract data . This will effectively let users build organizations upon this data and eventually help people who are suffering around the world. Also, it can help educate communities about current issues and help them combine efforts to better the world economy.
+
+Brandon: 
+The product vision is to create a global chart that would have an interactive sort of world map in which you could show statistics for all the data. This would help those who might be trying to strive for better health care or pointing out a disparity to have changed in the world of politics. Users who visit the site can be informed how certain countries are in the world of healthcare and how they can be better or worse in some circumstances. This way the user could see how different countries operate in terms of health care and if they see a different country is getting better results they can strive for something better in their own. 
+
 Identify the major features of each of the proposed projects:
+
+Cameron: 
+Calculate effectiveness of indicators in commercials
+Indicate most popular items in ads
+Indicate common combinations of indicators in ads
+Display a graph of different brands and their ad characteristics
+Allowing the users to base their own decisions off the data set
+
+Bryson: 
+Calculate the cases/deaths ratio for each country
+Compare the ratios between multiple countries 
+Display a graph based on the compared countries
+
+Jnana: 
+Calculate critical issues such as mortality rates in a country
+Compare calculated statistics with other countries
+Display statistics in the form of charts and graphs based on country
+Show general data about the country
+Brandon: 
+Look at other countries surgery data
+View general welfare/ nutrition of other countries
+View water and sanitation
+Indicate medical resources and usage
+View health immunization
+(NOTE: All the above are per country) 
+
