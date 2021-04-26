@@ -1,0 +1,23 @@
+.container {
+  max-width: 960px;
+}
+
+.formbackground {
+  background-color: white;
+}
+
+.back {
+  background-color: #333;
+}
+
+.marginHeader {
+  margin-bottom: 10pt;
+}
+
+.marginSubmitButton {
+  margin-bottom: 10pt;
+}
+
+.formText {
+  color: black;
+}
