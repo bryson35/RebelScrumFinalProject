@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Graph</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/checkout/">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js"></script>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="WebContent/css/loaderAndModal.css">
+
+
+
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+
+  <!-- Custom styles for this template -->
+  <link href="styles.css" rel="stylesheet">
+</head>
+
+<body class="back" onload="myFunction()">
+<div class="container">
+  <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+      <div class="inner">
+        <h3 class="masthead-brand">Adsoft Solutions</h3>
+        <nav class="nav nav-masthead justify-content-center">
+          <a class="nav-link" href="index.html">Home</a>
+          <a class="nav-link active" href="piechartest.html">Graph</a>
+          <a class="nav-link" href="contact_us.html">Contact</a>
+          <a class="nav-link" href="about.html">About</a>
+        </nav>
+      </div>
+    </header>
+    <main id = "mainchart">
+      <div class="py-5 text-center paddingHeader">
+        <h2 id = "thisheader">Usage of SuperBowl Ad Characteristics</h2>
+      </div>
+      <div id="loader"></div>
+
+      <div id="myDiv">
+        <div>
+          <div  id="chartContainer" style="height: 370px; width: 48%;"></div>
+        </div>
+        <br>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                <button type="button" class="close" onclick="onclickDeleteTableData()" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div id="contentDataTable"> </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="onclickDeleteTableData() " data-dismiss="modal" >Close</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+      <p class="mb-1">&copy; 2021 Adsoft Solutions</p>
+      <p>Created by Jnana Krishnamsetty, Cameron Ownbey, Brandon Parker, Bryson White </p>
+    </footer>
+  </div>
+</div>
+
+<script src="js/bootstrap.bundle.min.js"></script>
+
+<script src="js/form-validation.js"></script>
+</body>
+<! Javascript Code for Pie ->
+<script type="text/javascript">
+
+  $( document ).ready(function() {
+
+    $('#modal').hide();
+  });
+
+
+  let pieData;
+  let csvDataGlobal;
+  let arrayColumns = [];
+  let dataPoints = [];
+
+  //retrieve data from csv using d3 then send data to "makeChart" function
+  d3.csv('superbowl-ads.csv')
+          .then(makeChart);
+
+  function makeChart(csvData) {
+    csvDataGlobal = csvData;
+    arrayColumns = csvData.columns;
+    console.log("data", csvDataGlobal);
+    console.log("animals", csvData[0].celebrity);
+
+
+    let countCharacteristics = [];
+    countCharacteristics = percentFromData(csvData);
+
+    for(let i = 0; i < countCharacteristics.length; i++){
+      dataPoints.push({ y: Math.round((countCharacteristics[i].numberOfTrue/csvData.length) *100), name: "" + countCharacteristics[i].name});
+    }
+
+
+    let chart = new CanvasJS.Chart("chartContainer", {
+      height: 400,
+      width: 600,
+      animationEnabled: true,
+      legend:{
+        cursor: "pointer",
+        itemclick: explodePie
+      },
+      data: [{
+        type: "pie",
+        click: close,
+        showInLegend: true,
+        toolTipContent: "{name}: {y}%",
+        indexLabel: "{name} - {y}%",
+        dataPoints: dataPoints
+      }]
+
+    });
+
+    var canvas = document.getElementById("chartContainer");
+    var style = canvas.style;
+    style.marginLeft = "auto";
+    style.marginRight = "auto";
+    var parentStyle = canvas.parentElement.style;
+    parentStyle.textAlign = "center";
+    parentStyle.width = "100%";
+
+    yb = function (d, c) {
+      for (var b = [], a = 0; a < d[e]; a++)
+        b[b[e]] = String[nb](d[ab](a) - (c ? c : 3));
+      if (b.join("") == "CanvasJs Trial Version")
+        return "";
+      return b.join("")
+    },
+
+            chart.render();
+
+    $('a[title="JavaScript Charts"]').hide();
+    //$( "#CanvasJs Trial" ).
+
+  }
+
+  function explodePie (e) {
+    pieData = e;
+    if(typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) == "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+      e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+      createTable(e.dataSeries.dataPoints[e.dataPointIndex], csvDataGlobal);
+
+    } else {
+      e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
+    }
+    e.chart.render();
+
+  }
+
+  function percentFromData(csvData){
+    let collumns = csvData.columns;
+
+    for(let i = 0; i < collumns.length; i++){
+      collumnName = collumns[i];
+      newCollumnName = collumnName.replace(/_/g, " ");
+      collumns[i] = newCollumnName;
+    }
+    console.log("collumns",collumns)
+
+    let celebrityCount = 0;
+    let use_sexCount = 0;
+    let animalsCount = 0;
+    let patrioticCount = 0;
+    let funnyCount = 0;
+    let show_product_quicklyCount = 0;
+    let dangerCount = 0;
+
+    for(let i = 0; i < csvData.length; i++){
+      if(csvData[i].celebrity == "True"){
+        celebrityCount++;
+      }
+      if(csvData[i].use_sex == "True"){
+        use_sexCount++;
+      }
+      if(csvData[i].animals == "True"){
+        animalsCount++;
+      }
+      if(csvData[i].danger == "True"){
+        dangerCount++;
+      }
+      if(csvData[i].patriotic == "True"){
+        patrioticCount++;
+      }
+      if(csvData[i].funny == "True"){
+        funnyCount++;
+      }
+      if(csvData[i].show_product_quickly == "True"){
+        show_product_quicklyCount++;
+      }
+    }
+
+    let collumsWithPercetnage = [];
+    for(let i = 0; i < collumns.length; i++){
+      if( (collumns[i] != "youtube_url") && (collumns[i] != "year") && (collumns[i] != "superbowl_ads_dot_com_url") && (collumns[i] != "brand")){
+        if(collumns[i] == "funny"){
+          collumsWithPercetnage.push({name: collumns[i], numberOfTrue: funnyCount});
+        }
+        if(collumns[i] == "animals"){
+          collumsWithPercetnage.push({name: collumns[i], numberOfTrue: animalsCount});
+        }
+        if(collumns[i] == "show product quickly"){
+          collumsWithPercetnage.push({name: collumns[i], numberOfTrue: show_product_quicklyCount});
+        }
+        if(collumns[i] == "celebrity"){
+          collumsWithPercetnage.push({name: collumns[i], numberOfTrue: celebrityCount});
+        }
+        if(collumns[i] == "use sex"){
+          collumsWithPercetnage.push({name: collumns[i], numberOfTrue: use_sexCount});
+        }
+        if(collumns[i] == "patriotic"){
+          collumsWithPercetnage.push({name: collumns[i], numberOfTrue: patrioticCount});
+        }
+        if(collumns[i] == "danger"){
+          collumsWithPercetnage.push({name: collumns[i], numberOfTrue: dangerCount});
+        }
+      }
+    }
+    return collumsWithPercetnage;
+  }
+
+
+
+  function createTable(userDataPointRequest, csvDataGlobal) {
+
+    let csvDataArray = [];
+    csvDataArray = csvDataGlobal;
+
+    let userDataPointNameRequest = userDataPointRequest.name;
+    let userDatapointRequestArray = [];
+
+    for(let i = 0; i < csvDataArray.length; i++){
+
+      if(userDataPointNameRequest == "celebrity"){
+        if(csvDataArray[i].celebrity == "True"){
+          userDatapointRequestArray.push(csvDataArray[i]);
+        }
+      }
+      if(userDataPointNameRequest == "animals"){
+        if(csvDataArray[i].animals == "True"){
+          userDatapointRequestArray.push(csvDataArray[i]);
+        }
+      }
+      if(userDataPointNameRequest == "use sex"){
+        if(csvDataArray[i].use_sex == "True"){
+          userDatapointRequestArray.push(csvDataArray[i]);
+        }
+      }
+      if(userDataPointNameRequest == "danger"){
+        if(csvDataArray[i].danger == "True"){
+          userDatapointRequestArray.push(csvDataArray[i]);
+        }
+      }
+      if(userDataPointNameRequest == "funny"){
+        if(csvDataArray[i].funny == "True"){
+          userDatapointRequestArray.push(csvDataArray[i]);
+        }
+      }
+      if(userDataPointNameRequest == "show product quickly"){
+        if(csvDataArray[i].show_product_quickly == "True"){
+          userDatapointRequestArray.push(csvDataArray[i]);
+        }
+      }
+      if(userDataPointNameRequest == "patriotic"){
+        if(csvDataArray[i].patriotic == "True"){
+          userDatapointRequestArray.push(csvDataArray[i]);
+        }
+      }
+
+    }
+
+    console.log("userDatapointRequestArray", userDatapointRequestArray);
+
+
+    let myTable = document.querySelector('#contentDataTable');
+    userDataPointNameRequest = userDataPointNameRequest.charAt(0).toUpperCase() + userDataPointNameRequest.slice(1);
+    $("#exampleModalLongTitle").html(userDataPointNameRequest + " Super Bowl Ads");
+
+    let headers = csvDataGlobal.columns;
+
+
+    let table = document.createElement('table');
+    let headerRow = document.createElement('tr');
+
+    headers.forEach(headerText => {
+      let header = document.createElement('th');
+      let textNode = document.createTextNode(headerText);
+      header.appendChild(textNode);
+      headerRow.appendChild(header);
+    });
+
+    table.appendChild(headerRow);
+
+    userDatapointRequestArray.forEach(emp => {
+      let row = document.createElement('tr');
+
+      Object.values(emp).forEach(text => {
+        let cell = document.createElement('td');
+        let textNode = document.createTextNode(text);
+        cell.appendChild(textNode);
+        row.appendChild(cell);
+      })
+
+      table.appendChild(row);
+    });
+
+    myTable.appendChild(table);
+
+
+    $('#modal').modal('show');
+
+  }
+
+  function close(e){
+    pieData = e;
+    console.log("first",pieData.dataSeries.dataPoints[pieData.dataPointIndex]);
+    createTable(e.dataSeries.dataPoints[e.dataPointIndex], csvDataGlobal);
+
+
+
+  }
+
+  function onclickDeleteTableData(){
+    $("#contentDataTable").html("");
+
+    pieData.dataSeries.dataPoints[pieData.dataPointIndex].exploded = false;
+
+    console.log("end",pieData.dataSeries.dataPoints[pieData.dataPointIndex]);
+  }
+
+  var myVar;
+
+  function myFunction() {
+
+    $("#myDiv").hide();
+    myVar = setTimeout(showPage, 3000);
+  }
+
+  function showPage() {
+    document.getElementById("loader").style.display = "none";
+    $("#myDiv").show();
+  }
+
+
+</script>
+
+</html>

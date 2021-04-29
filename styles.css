@@ -55,6 +55,7 @@ body {
 
 .masthead-brand {
   margin-bottom: 0;
+  color: #fff;
 }
 
 .nav-masthead .nav-link {
@@ -152,6 +153,21 @@ body {
 .marketing .col-lg-4 p {
   margin-right: .75rem;
   margin-left: .75rem;
+}
+.back{
+  color: black;
+}
+
+.mainchart{
+  justify-content: center;
+  align-items: center;
+}
+#thisheader{
+  color: #fff;
+}
+#chartContainer {
+  width: 600px;
+  height: 400px;
 }
 /* rtl:end:ignore */
 
