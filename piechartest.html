@@ -48,7 +48,7 @@
 <body class="back" onload="myFunction()">
 <div class="container">
   <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
-    <header class="masthead mb-auto">
+    <header class="masthead" id = "charthead">
       <div class="inner">
         <h3 class="masthead-brand">Adsoft Solutions</h3>
         <nav class="nav nav-masthead justify-content-center">
@@ -92,19 +92,14 @@
           </div>
         </div>
       </div>
-    </main>
 
-    <footer class="my-5 pt-5 text-muted text-center text-small">
-      <p class="mb-1">&copy; 2021 Adsoft Solutions</p>
-      <p>Created by Jnana Krishnamsetty, Cameron Ownbey, Brandon Parker, Bryson White </p>
-    </footer>
+    </main>
   </div>
 </div>
-
-<script src="js/bootstrap.bundle.min.js"></script>
-
-<script src="js/form-validation.js"></script>
 </body>
+
+
+
 <! Javascript Code for Pie ->
 <script type="text/javascript">
 
@@ -141,6 +136,7 @@
     let chart = new CanvasJS.Chart("chartContainer", {
       height: 400,
       width: 600,
+      exportEnabled: true,
       animationEnabled: true,
       legend:{
         cursor: "pointer",
@@ -388,5 +384,4 @@
 
 
 </script>
-
 </html>
